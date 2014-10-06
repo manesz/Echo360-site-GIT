@@ -31,14 +31,19 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="<?php echo get_template_directory_uri(); ?>/library/js/jquery.1.11.1.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/library/js/bootstrap.min.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/library/js/bootstrapValidator.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/library/js/google-analytic.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/library/js/image-rollver.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/library/js/post.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/library/js/jcarousellite_1.0.1.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/library/js/myscript.js"></script>
 
 <script>
 
 	$(document).ready(function(){
+	
+		$('#submit').click(function(){
+	
 		$(window).on('scroll',function() {
 		var scrolltop = $(this).scrollTop();
 	 
@@ -61,49 +66,21 @@
 			.find("i.indicator")
 			.toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
 	}
-	// $(".collapse").collapse();
-	// $('#accordion').collapse({hide: true})
 	$('.in').collapse({hide: true})
 	
 </script>
 
 <script>
     function toggleChevron(e) {
-        $(e.target)
-            .prev('.panel-heading')
-            .find("i.indicator")
-            .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
-    }
-    // $(".collapse").collapse();
-    $('#accordion').collapse({hide: true})
+    $(e.target)
+			.prev('.panel-heading')
+			.find("i.indicator")
+			.toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+	}
+	$(".collapse").collapse();
+	$('#accordion').collapse({hide: true})
+	$('#collapse-Enquiry-Form').collapse("show")
 	
-</script>
-
-<script>
-	$(document).ready(function(){
-	
-		// $('#inquieyFormSubmit').click(function(){
-			// alert('Submited !');
-		// });
-		
-		// $('form').on('submit', function (e) {
-	
-			// alert("Successful !!");
-
-		  // e.preventDefault();
-
-		  // $.ajax({
-			// type: 'post',
-			// url: 'sendmail.php',
-			// data: $('form').serialize(),
-			// success: function () {
-			  // alert('form was submitted');
-			// }
-		  // });
-
-		// });
-	
-	// });
 </script>
 
 

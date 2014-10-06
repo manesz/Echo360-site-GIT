@@ -36,7 +36,10 @@
 						} else if( is_page('Team') ) {
 							// get_template_part( 'post-formats/format', get_post_format() );
 							get_template_part('page', 'team');
-                        } else if( is_page('Services') ) {
+                        } else if( is_page('Client') ) {
+                            // get_template_part( 'post-formats/format', get_post_format() );
+                            get_template_part('page', 'client');
+						} else if( is_page(72) ) {
                             // get_template_part( 'post-formats/format', get_post_format() );
                             get_template_part('page', 'service');
 						} else {

@@ -299,62 +299,114 @@ $table_name = "echo360_inquiry_form";
 	
 // }
 
-/* Send Mail with WP_Mail() */ 
+add_action( 'phpmailer_init', 'configure_smtp' );
+function configure_smtp( PHPMailer $phpmailer ){
+    $phpmailer->isSMTP(); //switch to smtp
+    $phpmailer->Host = 'ssl://smtp.gmail.com';
+    $phpmailer->SMTPAuth = true;
+    $phpmailer->Port = 465;
+    $phpmailer->Username = 'w.satitnimankan@echo-360.com';
+    $phpmailer->Password = 'Tn6rb*%e';
+    $phpmailer->SMTPSecure = false;
+    $phpmailer->From = 'w.satitnimankan@echo-360.com';
+    $phpmailer->FromName='Contact Form - Echo360 site';
+}
 
-//$action = @$_POST['action'];
-//if(!empty($action)):
-//
-//	$email_to = "w.satitnimankan@echo-360.com";
-//	// $email_to = "j.thanasitthipan@echo-360.com";
-//	$email_title = "Echo 360 Iquiry From";
-//	$email_headers[] = 'From: Wararit Satitnimankan <manesz13@gmail.com>';
-//	$email_headers[] = "Cc: P'Max <j.thanasitthipan@echo-360.com>";
-//	// $email_headers[] = 'Cc: iluvwp@wordpress.org'; // note you can just use a simple email address
-//	$email_message = file_get_contents(get_template_directory_uri()."/library/mail-template.html");
-//
-//	$service = '';
-//
-//	foreach(@$_POST['inquiryService'] as $key=>$value):
-//		$email_service .= '<li>'.$value.'</li>';
-//	endforeach;
-//
-//	foreach(@$_POST['inquiryService'] as $key=>$value):
-//		$service .= $value.',';
-//	endforeach;
-//
-//	$email_message = str_replace('{{title}}', $email_title, $email_message);//replaceTitle
-//	$email_message = str_replace('{{date}}', date('Y M d'), $email_message);//replaceDate
-//	$email_message = str_replace('{{service}}', $email_service, $email_message);//replaceService
-//	$email_message = str_replace('{{company}}', @$_POST['inquiryCompany'], $email_message);//replaceCompany
-//	$email_message = str_replace('{{brand}}', @$_POST['inquiryBrand'], $email_message);//replaceBrand
-//	$email_message = str_replace('{{name}}', @$_POST['inquiryName'], $email_message);//replaceName
-//	$email_message = str_replace('{{email}}', @$_POST['inquiryEmail'], $email_message);//replaceEmail
-//	$email_message = str_replace('{{mobile}}', @$_POST['inquiryMobile'], $email_message);//replaceMobileNumber
-//	$email_message = str_replace('{{remark}}', @$_POST['inquiryRemark'], $email_message);//replaceRemark
-//
-//	function set_html_content_type() { return 'text/html'; }
-//
-//	add_filter( 'wp_mail_content_type', 'set_html_content_type' );
-//
-//	wp_mail( $email_to, $email_title, $email_message, $email_headers );
-//
-//	remove_filter( 'wp_mail_content_type', 'set_html_content_type' );
-//
-//	// insert data from inquiry form to table 'echo360_inquiry_form' //
-//	$wpdb->insert(
-//		'echo360_inquiry_form',
-//		array(
-//			'inquiry_date' => date('Y-m-d'),
-//			'brand' => @$_POST['inquiryBrand'],
-//			'company' => @$_POST['inquiryCompany'],
-//			'name' => @$_POST['inquiryName'],
-//			'email' => @$_POST['inquiryEmail'],
-//			'mobile_number' => @$_POST['inquiryMobile'],
-//			'service' => $service,
-//			'remark' => @$_POST['inquiryRemark'],
-//			'create_datetime' => date('Y-m-d H:i:s'),
-//		)
-//	);
-//
-//endif;
+function post_contact_mail(){
+
+	if ( isset($_POST["action"]) && $_POST["action"] == "send_contact_form" ) {
+
+		$email_to = "info@echo-360.com";
+		$email_title = "Echo 360 Contact From";
+		$email_headers[] = "From: ".@$_POST['contactEmail'];
+		// $email_headers[] = "Cc: P'Max <j.thanasitthipan@echo-360.com>";
+		$email_headers[] = "Cc: Mick <w.satitnimankan@echo-360.com>";
+		$email_message = file_get_contents(get_template_directory_uri()."/library/mail-contact-template.html");
+
+		$email_message = str_replace('{{title}}', $email_title, $email_message);//contactTitle
+		$email_message = str_replace('{{date}}', date('Y M d'), $email_message);//contactDate
+		$email_message = str_replace('{{subject}}', @$_POST['contactName'], $email_message);//contactName
+		$email_message = str_replace('{{name}}', @$_POST['contactSubject'], $email_message);//contactSubject
+		$email_message = str_replace('{{email}}', @$_POST['contactEmail'], $email_message);//contactEmail
+		$email_message = str_replace('{{phone_number}}', @$_POST['contactPhone'], $email_message);//contactPhone
+		$email_message = str_replace('{{message}}', @$_POST['contactMessage'], $email_message);//contactMessage
+
+		function set_html_content_type() { return 'text/html'; }
+
+		add_filter( 'wp_mail_content_type', 'set_html_content_type' );
+
+		if( wp_mail( $email_to, $email_title, $email_message, $email_headers ) ):
+			echo "<h1>Success : send mail</h1>";
+		else:
+			echo "<h1>Error : can't send mail</h1>";
+		endif;
+
+		remove_filter( 'wp_mail_content_type', 'set_html_content_type' );
+
+	}
+
+}
+add_action('post_contact_mail','post_contact_mail');
+
+function post_mail(){
+
+	if ( isset($_POST["action"]) && $_POST["action"] == "send_enquiry_form" ) {
+
+		$email_to = "sales@echo-360.com";
+		$email_title = "Echo 360 Equiry From";
+		$email_headers[] = "From: ".@$_POST['inquiryEmail']." <".@$_POST['inquiryName'].">";
+		// $email_headers[] = "Cc: P'Max <j.thanasitthipan@echo-360.com>";
+		$email_headers[] = "Cc: Mick <w.satitnimankan@echo-360.com>";
+		$email_message = file_get_contents(get_template_directory_uri()."/library/mail-template.html");
+
+		$service = '';
+
+		foreach(@$_POST['inquiryService'] as $key=>$value):
+			$email_service .= '<li>'.$value.'</li>';
+		endforeach;
+
+		foreach(@$_POST['inquiryService'] as $key=>$value):
+			$service .= $value.',';
+		endforeach;
+
+		$email_message = str_replace('{{title}}', $email_title, $email_message);//replaceTitle
+		$email_message = str_replace('{{date}}', date('Y M d'), $email_message);//replaceDate
+		$email_message = str_replace('{{service}}', $email_service, $email_message);//replaceService
+		$email_message = str_replace('{{company}}', @$_POST['inquiryCompany'], $email_message);//replaceCompany
+		$email_message = str_replace('{{brand}}', @$_POST['inquiryBrand'], $email_message);//replaceBrand
+		$email_message = str_replace('{{name}}', @$_POST['inquiryName'], $email_message);//replaceName
+		$email_message = str_replace('{{email}}', @$_POST['inquiryEmail'], $email_message);//replaceEmail
+		$email_message = str_replace('{{mobile}}', @$_POST['inquiryMobile'], $email_message);//replaceMobileNumber
+		$email_message = str_replace('{{remark}}', @$_POST['inquiryRemark'], $email_message);//replaceRemark
+
+		function set_html_content_type() { return 'text/html'; }
+
+		add_filter( 'wp_mail_content_type', 'set_html_content_type' );
+		
+		if( wp_mail( $email_to, $email_title, $email_message, $email_headers ) ):
+			echo "<h1>Success : send mail</h1>";
+		else:
+			echo "<h1>Error : can't send mail</h1>";
+		endif;
+
+		remove_filter( 'wp_mail_content_type', 'set_html_content_type' );
+
+		// insert data from inquiry form to table 'echo360_inquiry_form' //
+		$result = $wpdb->insert( 'echo360_inquiry_form',
+			array(
+				'inquiry_date' => date('Y-m-d'),
+				'brand' => @$_POST['inquiryBrand'],
+				'company' => @$_POST['inquiryCompany'],
+				'name' => @$_POST['inquiryName'],
+				'email' => @$_POST['inquiryEmail'],
+				'mobile_number' => @$_POST['inquiryMobile'],
+				'service' => $service,
+				'remark' => @$_POST['inquiryRemark'],
+				'create_datetime' => date('Y-m-d H:i:s'),
+			));
+
+	}
+
+}//END: function: post_mail
+add_action('post_mail','post_mail');
 ?>

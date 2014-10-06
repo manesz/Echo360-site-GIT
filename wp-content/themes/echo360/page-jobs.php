@@ -78,8 +78,8 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $i; ?>">
-								<strong><?php the_title(); ?></strong> 
-								</a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+								<strong><?php the_title(); ?></strong> <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+								</a>
 							</h4>
 						</div><!-- END: .panel-heading -->
 						<div id="collapse<?php echo $i; ?>" class="panel-collapse collapse in">
@@ -137,14 +137,14 @@
 </article> <?php // end article ?>
 
 <script>
-	function toggleChevron(e) {
-    $(e.target)
-			.prev('.panel-heading')
-			.find("i.indicator")
-			.toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
-	}
-	$(".collapse").collapse();
-	$('#accordion').collapse({hide: true})
+	// function toggleChevron(e) {
+    // $(e.target)
+			// .prev('.panel-heading')
+			// .find("i.indicator")
+			// .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+	// }
+	// $(".collapse").collapse();
+	// $('#accordion').collapse({hide: true})
 </script>
 
 <?php get_footer(); ?>

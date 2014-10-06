@@ -68,7 +68,7 @@
 
                     ?>
 					<div class="clearfix"></div>
-					<h3 style="padding: 0 15px;">Board of Director</h3>
+					<h3 style="padding: 0 15px;">Board of Directors</h3>
                     <?php
 						
 						// WP_Query arguments

@@ -76,33 +76,84 @@
     <div class="col-lg-12" style="background: #fff; padding: 10px; margin-bottom: 15px;">
         <div class="contact-form">
             <h2>Contact Us</h2>
-            <form>
-                <div class="col-lg-6">
+            <form id="postContactForm" 
+				name="postContactForm" 
+				method="POST"
+				data-bv-message="This value is not valid" 
+				data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
+				data-bv-feedbackicons-invalid="glyphicon glyphicon-remove" 
+				data-bv-feedbackicons-validating="glyphicon glyphicon-refresh" 
+			>
+                <div class="col-lg-6 form-group">
                     <label for="name">Your name:</label>
-                    <input type="text" id="name" name="name" style="width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;"/>
+                    <input type="text" 
+						id="contactName" 
+						name="contactName" 
+						class="form-control" 
+						style="width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;"
+						data-bv-notempty="true" 
+						data-bv-notempty-message="The name is required"
+					/>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 form-group">
                     <label for="title">Your subject:</label>
-                    <input type="text" name="title" style="width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;"/>
+                    <input type="text" 
+						id="contactSubject" 
+						name="contactSubject" 
+						class="form-control" 
+						style="width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;"
+						data-bv-notempty="true" 
+						data-bv-notempty-message="The subject is required"
+					/>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 form-group">
                     <label for="email">Email address:</label>
-                    <input type="text" id="email" name="email" style="width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;"/>
+                    <input type="text" 
+						id="contactEmail" 
+						name="contactEmail" 
+						class="form-control" 
+						style="width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;"
+						data-bv-notempty="true" 
+						data-bv-notempty-message="The email is required"
+					/>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 form-group">
                     <label for="phone">Phone number:</label>
-                    <input type="text" id="phone" name="phone" style="width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;"/>
+                    <input type="text" 
+						id="contactPhone" 
+						name="contactPhone" 
+						class="form-control" 
+						style="width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;"
+						data-bv-notempty="true" 
+						data-bv-notempty-message="The email is required"
+					/>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-12 form-group">
                     <label for="description">Your message:</label>
-                    <textarea id="description" class="description" style=" min-height: 100px; width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;"></textarea>
+                    <textarea id="contactMessage" 
+						name="contactMessage" 
+						class="contactDescription form-control" 
+						style=" min-height: 100px; width: 100%; border: 1px #EE7D00 solid; margin-bottom: 20px; padding: 10px;" 
+						data-bv-notempty="true" 
+						data-bv-notempty-message="The message is required"
+					></textarea>
                 </div>
                 <div class="col-lg-12">
+					<input type="hidden" name="action" value="send_contact_form"/>
                     <input type="submit" value="SUBMIT" style="background: #EE7D00; color: #fff; width: 100%; border: 0; padding: 10px; font-size: 20px;"/>
                 </div>
             </form><!-- END: contact form -->
         </div>
     </div>
 </div>
+
+<div class="resultReloading"></div>
+
+<?php 
+	if( isset($_POST['action']) && $_POST['action'] == 'send_contact_form' ):
+		// echo "<script>alert('Send Contact Form');</script>";
+		do_action('post_contact_mail');
+	endif;
+?>
 
 <?php get_footer(); ?>
