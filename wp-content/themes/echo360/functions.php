@@ -317,6 +317,7 @@ function post_contact_mail(){
 	if ( isset($_POST["action"]) && $_POST["action"] == "send_contact_form" ) {
 
 		$email_to = "info@echo-360.com";
+		// $email_to = "w.satitnimankan@echo-360";
 		$email_title = "Echo 360 Contact From";
 		$email_headers[] = "From: ".@$_POST['contactEmail'];
 		// $email_headers[] = "Cc: P'Max <j.thanasitthipan@echo-360.com>";
@@ -353,6 +354,7 @@ function post_mail(){
 	if ( isset($_POST["action"]) && $_POST["action"] == "send_enquiry_form" ) {
 
 		$email_to = "sales@echo-360.com";
+		// $email_to = "w.satitnimankan@echo-360";
 		$email_title = "Echo 360 Equiry From";
 		$email_headers[] = "From: ".@$_POST['inquiryEmail']." <".@$_POST['inquiryName'].">";
 		// $email_headers[] = "Cc: P'Max <j.thanasitthipan@echo-360.com>";

@@ -45,10 +45,12 @@
                             <!-- <form id="postEnquiryForm" name="postEnquiryForm" method="POST"> -->
                             <form id="postEnquiryForm" 
 								name="postEnquiryForm"
+								method="POST" 
 								data-bv-message="This value is not valid"
 								data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
 								data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
-								data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
+								data-bv-feedbackicons-validating="glyphicon glyphicon-refresh" 
+								onsubmit="return confirm('Do you really want to submit the form?');" 
 							>
                                 <h4>Freebie Service ( บริการที่คุณสนใจ - เลือกได้มากกว่า 1 ข้อ )</h4>
                                 <div class="col-lg-6">
@@ -82,7 +84,7 @@
 											id="inquiryCompany" 
 											name="inquiryCompany" 
 											class="form-control" 
-											style="width: 100%; padding: 10px; border-radius: 0px;"
+											style="width: 100%; padding: 10px; border-radius: 0px;" 
 											data-bv-notempty="true" 
 											data-bv-notempty-message="The company is required"
 										/>
@@ -95,7 +97,7 @@
 											id="inquiryName" 
 											name="inquiryName" 
 											class="form-control" 
-											style="width: 100%; padding: 10px; border-radius: 0px;"
+											style="width: 100%; padding: 10px; border-radius: 0px;" 
 											data-bv-notempty="true" 
 											data-bv-notempty-message="The company is required"
 										/>

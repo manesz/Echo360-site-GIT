@@ -83,6 +83,7 @@
 				data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
 				data-bv-feedbackicons-invalid="glyphicon glyphicon-remove" 
 				data-bv-feedbackicons-validating="glyphicon glyphicon-refresh" 
+				onsubmit="return confirm('Do you really want to submit the form?');" 
 			>
                 <div class="col-lg-6 form-group">
                     <label for="name">Your name:</label>
@@ -147,7 +148,30 @@
     </div>
 </div>
 
-<div class="resultReloading"></div>
+<!-- Modal -->
+<div id="loading-image" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body" style="text-align: center;">
+				<p>
+					<!-- <img id="imgLoad" src="http://www.echo-360.com/wp-content/uploads/2014/09/loading.gif"/>
+					<img id="imgSuccess" src="http://www.echo-360.com/wp-content/uploads/2014/09/success.png"/>
+					<img id="imgError" src="http://www.echo-360.com/wp-content/uploads/2014/09/error.png"/> -->
+					<p id="note">
+						Thank you for your enquiry. Our sales team will contact you back as soon as possible.<br/><br/>
+						ขอขอบคุณสำหรับข้อมูลของท่าน ทีมงานของเราจะติดต่อกลับไปโดยเร็วที่สุด
+					</p>
+					
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default col-lg-12" data-dismiss="modal">Close</button>
+			</div>
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</div><!-- END: #loading-image .modal -->
+
+<!-- <div class="resultReloading"></div> -->
 
 <?php 
 	if( isset($_POST['action']) && $_POST['action'] == 'send_contact_form' ):
